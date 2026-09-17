@@ -26,7 +26,7 @@ your local network through the console's Remote Play interface, using the
 ## Installation (HACS)
 
 1. In HACS, open the **⋮** menu > **Custom repositories**
-2. Add `https://github.com/iharosi/ha-ps5-remoteplay` with type **Integration**
+2. Add `https://github.com/robemmerson/ha-ps5-remoteplay` with type **Integration**
 3. Find **PS5 Remote Play** in HACS, download it, and restart Home Assistant
 
 ## Setup
@@ -42,6 +42,8 @@ If your PS5 user has a passcode, set it under the integration's **Configure** bu
 to put the console into standby.
 
 ## License
+
+Fork of [iharosi/ha-ps5-remoteplay](https://github.com/iharosi/ha-ps5-remoteplay).
 
 AGPL-3.0-only. Protocol implementation based on [playactor](https://github.com/dhleong/playactor)
 and [chiaki](https://git.sr.ht/~thestr4ng3r/chiaki).
