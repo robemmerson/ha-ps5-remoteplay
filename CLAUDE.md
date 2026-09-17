@@ -1,6 +1,6 @@
 # ha-ps5-remoteplay
 
-Home Assistant custom integration, installed through HACS. It creates one power switch per PS5 (wake, standby, status). Domain `ps5_remoteplay`, GitHub `iharosi/ha-ps5-remoteplay`. The protocol work is done by the `ps5-remoteplay` library, pinned exactly in `manifest.json`.
+Home Assistant custom integration, installed through HACS. It creates one power switch per PS5 (wake, standby, status). Domain `ps5_remoteplay`, GitHub `robemmerson/ha-ps5-remoteplay` (a fork of `iharosi/ha-ps5-remoteplay`). The protocol work is done by the `ps5-remoteplay` library, pinned exactly in `manifest.json`.
 
 ## Related repos
 
@@ -47,7 +47,7 @@ It caught a URL inside `strings.json` that Home Assistant rejects.
 
 ## HACS
 
-- Submitted to the HACS default list on 2026-09-16 as **hacs/default PR #11033**. All checks pass. Review takes months; never request reviewers. The fork `iharosi/default` exists only for that PR and can be deleted once the PR is merged or closed.
+- Install this fork as a HACS **custom repository** (`https://github.com/robemmerson/ha-ps5-remoteplay`, type Integration). It is not in the HACS default list: the upstream repo has its own pending submission (hacs/default #11033), and HACS does not accept forks into the default list. Detaching this repo from the fork network would be a prerequisite for ever submitting it.
 - HACS shows a placeholder instead of our icon. **Nothing to fix on our side.** HACS loads icons from `brands.home-assistant.io/_/{domain}/icon.png`, and the brands repo stopped accepting custom integrations when HA 2026.3 added local `brand/` folders. This is a known, still-open HACS bug (hacs/integration #5171, #5179, #5223, #5402). Home Assistant's own device page shows the icon correctly.
 
 ## GitHub Actions security (verified 2026-09-16)
