@@ -33,10 +33,14 @@ pytest -q          # uses pytest-homeassistant-custom-component
 
 ## Release routine
 
+Releases are cut by `release.yml`, which runs on a `v*` tag and does the rest.
+
 1. If a new library version is needed, publish it to PyPI first and confirm `pip install --no-cache-dir ps5-remoteplay==X` works. v0.1.7 once shipped pinning an unpublished library, and Home Assistant failed to load it.
 2. Bump `version` in `manifest.json` (and the library pin in both `manifest.json` and `requirements-test.txt` if it changed), commit and push.
-3. Wait for the Validate workflow (HACS + hassfest) to pass.
-4. Create the GitHub release. The new tag triggers another validation run.
+3. Wait for the Validate workflow (HACS + hassfest + tests) to pass.
+4. Tag the merged commit `vX.Y.Z` and push the tag. `release.yml` then checks the tag against the `manifest.json` version and the library pin against `requirements-test.txt`, runs the tests and hassfest, and only then publishes the release with `ps5_remoteplay.zip` attached. A mismatch fails the run and publishes nothing, so a bad tag can be deleted and redone.
+
+HACS still installs from the repository tree rather than the attached zip: `hacs.json` has no `zip_release`, and adding one would change how existing installations update.
 
 hassfest can also run locally without Docker:
 1. Sparse-clone `home-assistant/core` at the installed HA version and run `git sparse-checkout set script`.
@@ -56,5 +60,6 @@ It caught a URL inside `strings.json` that Home Assistant rejects.
 - Workflows from first-time contributors' forks need approval.
 - No repository secrets and no `pull_request_target` triggers.
 - `validate.yml` uses `permissions: {}`.
+- `release.yml` is `permissions: {}` at the top level; only its `release` job takes `contents: write`, to create the release. It uses the automatic `github.token`, not a PAT.
 
 Local environment details (console, network, working preferences) are in `CLAUDE.local.md`, which is not committed.
